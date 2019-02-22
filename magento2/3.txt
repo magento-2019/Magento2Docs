@@ -1,0 +1,334 @@
+1) The _construct will be called after the __construct
+	The PHP native __construct method should not be overwritten or used in your code. If you want to execute code in a safe way on the start of a class use _construct.
+
+	Magento will use the native __construct to make sure everything is 'ready' for a class to be used such as defining the right cache tags for a certain model for example.
+
+Link -->  https://magento.stackexchange.com/questions/95158/what-is-construct-and-construct-in-magento2
+     -->  https://www.mageplaza.com/magento-2-module-development/how-to-create-controllers-magento-2.html
+
+
+
+
+2) Magento 2 every action has its own class which implements the execute() method.
+
+
+
+
+3) FrontName / Folder(or)File inside the Controller / Class Name.
+	|	|--> Optional if there is hierarchy.	|--> The class name which has to render.
+	|
+	|-->In the routes.xml in etc folder.
+
+
+
+4) php bin/magento deploy:mode:set developer
+
+
+	
+5) \Magento\Framework\App\Action\Action class which has dispatch method which will call execute method in controller
+
+
+
+6) $this->logger->warn( json_encode(get_class_methods($product)) );
+
+
+
+7) To see the values set for an attribute
+	https://magento.stackexchange.com/questions/105167/magento-2-how-to-get-attribute-options-value-of-eav-entity/115098#115098
+	//to do 
+
+
+
+8) To get the list of options for an attribute 
+	you can add to the constructor of your class an instance of \Magento\Eav\Model\Config like this:
+
+	protected $eavConfig;
+	public function __construct(
+	    ...
+	    \Magento\Eav\Model\Config $eavConfig,
+	    ...
+	){
+	    ...
+	    $this->eavConfig = $eavConfig;
+	    ...
+	}
+	then you can use that in your class
+
+	$attribute = $this->eavConfig->getAttribute('catalog_product', 'attribute_code_here');
+	$options = $attribute->getSource()->getAllOptions();
+
+
+	//2 
+	You can do it simply call below code inside your Block file.
+
+	<?php
+	namespace Vendor\Package\Block;
+
+	class Blockname extends \Magento\Framework\View\Element\Template
+	{
+	    protected $_productAttributeRepository;
+
+	    public function __construct(        
+		\Magento\Framework\View\Element\Template\Context $context,   
+		\Magento\Catalog\Model\Product\Attribute\Repository $productAttributeRepository,
+		array $data = [] 
+	    ){        
+		parent::__construct($context,$data);
+		$this->_productAttributeRepository = $productAttributeRepository;
+	    } 
+
+	    public function getAllBrand(){
+		$manufacturerOptions = $this->_productAttributeRepository->get('manufacturer')->getOptions();       
+		$values = array();
+		foreach ($manufacturerOptions as $manufacturerOption) { 
+		   //$manufacturerOption->getValue();  // Value
+		    $values[] = $manufacturerOption->getLabel();  // Label
+		}
+		return $values;
+	    }  
+	}
+
+
+	<div class="manufacturer-name">
+	      <?php $getOptionValue = $this->getAllBrand();?>
+	      <?php foreach($getOptionValue as $value){ ?>
+		   <span><?php echo $value;?></span>
+	      <?php } ?>
+	</div>
+
+
+
+
+9) To get the parent product Details form the virtual product id
+	protected $_catalogProductTypeConfigurable;
+
+	 public function __construct(
+		    \Magento\Catalog\Block\Product\Context $context,       
+		    //for getting parent id of simple
+		    \Magento\ConfigurableProduct\Model\ResourceModel\Product\Type\Configurable $catalogProductTypeConfigurable,
+		    array $data = []
+		) {
+		       //for getting parent id of simple
+		    $this->_catalogProductTypeConfigurable = $catalogProductTypeConfigurable;
+		    parent::__construct($context, $data);
+		}
+	    public function getProductData($id){ 
+		    $parentByChild = $this->_catalogProductTypeConfigurable->getParentIdsByChild($id);
+		    if(isset($parentByChild[0])){
+		        //set id as parent product id...
+		        $id = $parentByChild[0];          
+		    }
+		    return $id;     
+		}   
+
+
+
+
+10) To get the child product details 
+	$productTypeInstance = $product->getTypeInstance();
+	    $usedProducts = $productTypeInstance->getUsedProducts($product);
+
+	    //echo $product->getId(); //Main configurable product ID
+	    //echo $product->getName(); //Main Configurable Name
+
+	    foreach ($usedProducts  as $child) {
+		echo $child->getSku()."</br>"; //Child Product Sku    
+	    }
+
+
+	//2
+	if ($_product->getTypeId() === 'configurable') {
+	    $productTypeInstance = $product->getTypeInstance();
+	    $usedProducts = $productTypeInstance->getUsedProducts($product);
+	    foreach ($usedProducts as $childProduct) {
+		// ... do your stuff here ...
+	    }
+	}
+
+
+
+
+11) To get all the items from the order id
+	protected $orderRepository;
+
+	public function __construct(
+	    ...
+	    \Magento\Sales\Api\OrderRepositoryInterface $orderRepository,
+	    ....
+	) {
+	    ....
+	    $this->orderRepository = $orderRepository;
+	    ....
+	}
+	and use in required method as:
+
+	$order = $this->orderRepository->get($orderId);
+	foreach ($order->getAllItems() as $item) {
+	// var_dump($item->getData());
+	}
+	// Never use the object Manager
+
+
+
+
+12) To load the by order id
+        \Magento\Sales\Model\Order $order,
+	  public function getOrderItems()
+	    {
+		$order=$this->order->load(1);
+
+		return $order->getItems();
+
+	    }
+
+	//2 --> To get all the visible products
+	$order->getAllVisibleItems()
+
+
+
+
+13) This is how the different methods to get items from an order work:
+
+	getItems(): returns array of items from loaded order item collection
+	getAllItems(): returns array of all items that are not marked as deleted
+	getAllVisibleItems(): returns array of all items that are not marked as deleted and do not have a parent item
+	So to get only the configurable product and not its associated product, getAllVisibleItems() is the correct method:
+
+	the single simple item does not have a parent => visible
+	the configurable item does not have a parent => visible
+	the associated simple item has a parent => not visible
+
+
+
+14) Use this event for the place order check out ---> sales_order_save_after
+
+
+
+15) To perform the CURD operations on the product object 
+	
+        \Magento\Catalog\Api\Data\ProductInterfaceFactory $productFactory,  ---> To get the product object
+		        $product = $this->productFactory->create()->load( product_id );
+	
+        \Magento\Catalog\Api\ProductRepositoryInterface $productRepository
+		        $this->productRepository->save($product);    ---> To save the updated data 
+
+
+
+
+16) Basic Rules for Magento  2 
+
+	1) Don't use ObjectManager. The only place it should be used is in a Factory class.
+
+	2) Don't use business logic in a template. Templates are for displaying content only; they should never contain any code that changes the state of the system. Some logic can be contained in a template's Block class, but that block also should not change any system state. Changes (like creating a product) belong in a Model.
+
+	3) Use dependency injection and inject the objects you need in your class constructors. It makes it clear what your dependencies are, and allows you/others to change them as well via DI.
+
+	4) ORM objects (anything stored/loaded in the database, like Products) are non-injectable. You need to inject its Factory (literally append Factory to the class name you're getting), and use that to create your object instance.
+	
+	5) Use the service layer. That means use DI to get interfaces corresponding to objects, not the objects themselves.
+
+
+
+
+17) Use the Block folder to do the business logic 
+	object method
+
+	$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+	$product = $objectManager->create('Magento\Catalog\Model\Product')->load($product_id);
+	Factory Method
+
+	<?php
+	namespace Test\Module\Block;
+
+	class Product extends \Magento\Framework\View\Element\Template
+	{
+
+	  protected $_productloader;  
+
+
+	  public function __construct(
+		\Magento\Framework\View\Element\Template\Context $context,
+		\Magento\Catalog\Model\ProductFactory $_productloader
+
+	    ) {
+
+
+		$this->_productloader = $_productloader;
+		parent::__construct($context);
+	    }
+	    public function getLoadProduct($id)
+	    {
+		return $this->_productloader->create()->load($id);
+	    }
+
+	}
+
+
+	phtml file code
+
+	$product=$this->getLoadProduct(20);
+	echo $product->getName();
+	In Magento 2.1
+
+	<?php
+	    namespace Test\Module\Block;
+	    use Magento\Catalog\Api\ProductRepositoryInterface;
+	    class Product extends \Magento\Framework\View\Element\Template
+	     {
+		  protected $productRepository; 
+		  protected $_storeManager; 
+
+		  public function __construct(
+		    \Magento\Framework\App\Action\Context $context,
+		    ProductRepositoryInterface $productRepository
+		  ) {
+		      parent::__construct($context);
+
+		      $this->productRepository = $productRepository;
+		  }
+		  public function getProduct()
+		  {
+
+		      $productId=1;
+		      return $product = $this->productRepository->getById($productId);
+		  }
+	      }
+
+
+REFERENCE:    https://blog.qaisarsatti.com/magento_2/magento-2-load-product-by-id/
+
+
+18) To get the loaded product attribute values 
+	$product->getResource()->getAttribute($attribute_code)->getFrontend()->getValue($product)
+
+	<?php echo $product->getAttributeText('attr_id')  ?> 
+	
+
+	 $attribute = $_product->getResource()->getAttribute('custom_attribute_code');
+	    if ($attribute)
+	    {
+		echo $attribute_value = $attribute ->getFrontend()->getValue($_product);
+	    }
+
+
+
+19) To get the datas related to customer
+	
+	\Magento\Customer\Api\Data\CustomerInterface 
+	                  extends
+	\Magento\Framework\Api\CustomAttributesDataInterface
+
+	$customerRepository = $objectManager->get('Magento\Customer\Api\CustomerRepositoryInterface');
+		$customer = $customerRepository->getById(1);
+		$cattrValue = $customer->getCustomAttribute('my_custom_attribute');
+
+	$customer->getCustomAttribute('custom_id '); returns a Magento\Framework\Api\AttributeValue Object ( [_data:protected] => Array 	( [attribute_code] => custom_id [value] => a234 ) ) 
+
+
+
+20) To create a new page using the controller.
+	---> Controller->Index->index.php   uses pageFactory to render the custom header and footer in the new page.
+	---> The name of the layout file should be frontnameOfTheRoute_ControllerPageName_className
+		This will directly link to the layout page to render.
+	---> Here the layput specify the block where the business logic are used.
+	---> The phtml page specify the html css and the js files.

@@ -1,0 +1,56 @@
+1) for fixes look in the following url
+	https://github.com/magento/magento2/tree/2.2/app/design/frontend/Magento/luma
+2) <vedor name>/<theme !name this as theme no other file name>/
+	app/design/frontend/<Vendor>/
+├── <theme>/
+│   ├── etc/
+│   │   ├── view.xml  ---> contains the width and height arguments for the images in the site.... edit this
+│   ├── web/
+│   │   ├── images
+│   │   │   ├── logo.svg
+│   ├── registration.php     ---> contains the directory where the theme is stored.
+│   ├── theme.xml
+│   ├── composer.json
+
+
+3) To locate a template enable the advanced option in the admin page.
+4) Templates are phtml page can create a new one or edit the existing one, cannot be extended.
+5) The whole page are constructed using the layout file. see the body class to find the layout file.
+6) The class in the block are instance for an object.
+7) Always use reference container.  --> referenceContainer()    referenceBlock()
+8) If the applied change in css is not applied even after the cache flush delete the pub\static folder. Then deploy the static content.
+9) After creating a theme static deploy. Same vendor can have many themes.
+10) While changing the theme... erro occurs area already set.
+    Reason--->  https://magently.com/blog/magento-2-area-code/
+		the aim of optimising query processes.
+		The most common problems with Area Code occur in the moment of using setup:upgrade and other CLI commands.
+		
+11) There is a error in magento email module override the function. Only the public functions can be overrided in the plugin.
+12) <Vendor_Name>/<Moudle_Name>/
+	etc/di.xml   --->  contains the dependencies.
+13) delete from core_config_data where path = 'design/theme/theme_id';
+
+14) To Add external js libraries in js 
+	app/code/Magento/Theme/view/frontend/layout/default_head_blocks.xml
+
+	<!-- Add external resources -->
+	<css src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css" src_type="url" />
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js" src_type="url" />
+        <link rel="stylesheet" type="text/css" src="http://fonts.googleapis.com/css?family=Montserrat" src_type="url" /> 
+15) To remove the external libraries in js.
+	<!-- Remove external resources -->
+        <remove src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css"/>
+        <remove src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"/>
+        <remove src="http://fonts.googleapis.com/css?family=Montserrat" /> 
+16) content > design > select the store view > HTML Head >script and style sheets.
+17) <move element="product.info.stock.sku" destination="product.info.price" after="product.price.final"/>
+				           |--> The parent block of the destination |--> The normal block after which i want to display.
+18) To remove a block use the reference block --> <referenceBlock name="catalog.compare.sidebar" remove="true" />
+19) Replace elements
+	To replace an element, remove it and add a new one.
+20) Js at three levels
+	---> lib/web  (avaiable in any place in magento)
+	---> theme/web/js ---> require(["js/theme.js"], function(){
+     					});
+
+

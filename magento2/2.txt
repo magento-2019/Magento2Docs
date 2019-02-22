@@ -1,0 +1,122 @@
+1) It is necessary to use like…
+	jQuery(“.widget-product-grid”).not(‘.slick-initialized’).slick(
+
+	instead of…
+	jQuery(“.widget-product-grid”).slick(
+
+	because if multiple product list widgets will be there in same page (like home page), then it may give JS error.
+2) SHIM config
+	To specify the dependencies for the js that are alredy installed.
+	is useful if you have an existing jQuery project you want to convert and do not want to modify the sources of the jQuery 		plugins to call define().
+3) Use require-config.js to load files needed on all pages
+    uses for creating the JavaScript resources mapping.
+4) requirejs-config.js
+	var config = {
+	    paths: {   
+         
+		 'myfile': "Vendor_Modulename/js/myfile",
+		 'slick' : 'js/slick.min'
+
+	      },   
+
+	    shim: {
+
+	    'myfile': {
+		deps: ['jquery']
+	    },
+	    'slick': {
+            deps: ['jquery']
+           }
+
+	  }
+	} 
+
+	using,You can use anywhere in your template file by below method,
+	<srcipt>
+	 require(["jquery","myfile"],function($,myfile){
+	     $(document).ready(function(){
+		//call your js here...
+	     })
+	 })
+	</script>
+     deps: --> jquery script dependencies should be loaded before loading myfile.js
+
+5) if you want to load your latest tweets onto a web page, and you do this synchronously,
+   then a visitor to your site won’t be able to do anything until those tweets are loaded.
+
+6) RequireJS will kick off asynchronous requests.
+
+7) - Configuring dependencies
+
+	Lets say you have 2 javascript modules(moduleA and moduleB) and one of them(moduleA) depends on the other(moduleB). Both of these are necessary for your own module so you specify the dependencies in require() or define()
+
+	require(['moduleA','moduleB'],function(A,B ) {
+	    ...
+	}
+	But since require itself follow AMD, you have no idea which one would be fetched early. This is where shim comes to rescue.
+
+	require.config({
+	    shim:{
+	       moduleA:{
+		 deps:['moduleB']
+		} 
+	    }
+
+	})
+	This would make sure moduleB is always fetched before moduleA is loaded.
+
+	- Configuring exports
+
+	Shim export tells RequireJS what member on the global object (the window, assuming you're in a browser, of course) is the actual module value. Lets say moduleA adds itself to the window as 'modA'(just like jQuery and underscore does as $ and _ respectively), then we make our exports value 'modA'.
+
+	require.config({
+	    shim:{
+	       moduleA:{
+		 exports:'modA'
+		} 
+	    }
+	It will give RequireJS a local reference to this module. The global modA will still exist on the page too.
+
+	-Custom initialization for older "browser global" scripts
+
+	This is probably the most important feature of shim config which allow us to add 'browser global', 'non-AMD' scripts(that do not follow modular pattern either) as dependencies in our own module.
+
+	Lets say moduleB is plain old javascript with just two functions funcA() and funcB().
+
+	function funcA(){
+	    console.log("this is function A")
+	}
+	function funcB(){
+	    console.log("this is function B")
+	}
+	Though both of these functions are available in window scope, RequireJS recommends us to use them through their global identifier/handle to avoid confusions. So configuring the shim as
+
+	shim: {
+	    moduleB: {
+		deps: ["jquery"],
+		exports: "funcB",
+		init: function () {
+		    return {
+		        funcA: funcA,
+		        funcB: funcB
+		    };
+		}
+	    }
+	}
+	The return value from init function is used as the module export value instead of the object found via the 'exports' string. This will allow us to use funcB in our own module as
+
+	require(["moduleA","moduleB"], function(A, B){
+	    B.funcB()
+	})
+
+8) AMD ---> https://github.com/amdjs/amdjs-api/wiki/AMD
+
+9) data-mage-init --> When the Javascript is inserted into the specified element, the script is called only for this particular element. It is 			      not automatically called for other elements of this type on the page.
+
+10) https://sherocommerce.com/use-third-party-javascript-plugins-magento-2/
+	Imeperative
+	Declarative
+		--> Create a js component in web/js.
+		--> 
+
+

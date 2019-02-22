@@ -1,0 +1,23 @@
+1) Slick installtion.
+2) Issues.
+3) Multiplpe store view
+4) Issues Faced.
+5) Area code issue reason. pointed to what. Reasons for this issue. --Done
+6) Group in tab discussion. with/without. How the tab area rednered detailed.  --Done
+7) New tab using a group custom. Different group. --Done
+8) require-config.js --Done
+9) Shim --Done
+10) include external js in magento 2.  --Done  
+11) Differne ways to include an js extension in magento 2.  --Done
+
+
+
+18/02/2019
+
+1) arguments in block
+2) ways --> Rendering of blocks
+
+1) Footer arrow, responsive.
+2) Icons footer round shape.
+3) Disable arrow for the last slide in slick.
+4) Correct the flickering on hover on the product item.
