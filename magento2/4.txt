@@ -1,0 +1,52 @@
+1) To get the details from the cart page
+  \Magento\Checkout\Model\Cart
+
+
+      $productInfo = $this->_cart->getQuote()->getItemsCollection();
+        //$productInfo = $this->cart->getQuote()->getAllItems(); /*****For All items *****/
+        foreach ($productInfo as $item){
+           echo $item->getProductId();
+
+        }
+
+
+    foreach ($this->cart->getQuote()->getAllItems() as $item) {
+        if ('simple' != $item->getProductType()) continue;
+        $valor[]= array (
+                'id' => $item->getSku(),
+                'quantity' => $item->getQty(),
+                'price' => $item->getParentItemId() ? $item->getParentItem()->getPrice() : $item->getPrice()
+                /*** For the configuration produts***/
+        );
+        }
+
+
+
+        You can use the hasProductId function to check if a product is available in the cart or not.
+        \Magento\Checkout\Model\SessionFactory $checkoutSession
+
+        if ($this->checkoutSession->create()->getQuote()->hasProductId($productId)) {
+        }
+
+
+        /***Get number of items in cart and total quantity in cart.***/
+        $totalItems = $cart->getQuote()->getItemsCount();
+        $totalQuantity = $cart->getQuote()->getItemsQty();
+
+
+        /***Get base total price and grand total price of items in cart.***/
+        $subTotal = $cart->getQuote()->getSubtotal();
+        $grandTotal = $cart->getQuote()->getGrandTotal();
+
+
+        /** To get the shipping and billing address **/
+        $billingAddress = $cart->getQuote()->getBillingAddress();
+        echo '<pre>'; print_r($billingAddress->getData()); echo '</pre>';
+
+        $shippingAddress = $cart->getQuote()->getShippingAddress();
+        echo '<pre>'; print_r($shippingAddress->getData()); echo '</pre>';
+
+2) https://magento.stackexchange.com/questions/115929/magento2-how-to-add-a-product-into-cart-programatically-when-checkout-cart-pro
+
+
+3) Use the event and observer to create a count attribute
