@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * MageCubeTeam
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the MageCubeTeam.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.magecube.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    MageCubeTeam
+ * @package     MageCubeTeam_ProductQuickView
+ * @copyright   Copyright (c) 2018 MageCubeTeam (http://www.magecube.com/)
+ * @license     https://www.magecube.com/LICENSE.txt
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../Magento/Store/etc/config.xsd">
+    <default>
+        <magecubeteam_quickview>
+            <general>
+                <enabled>1</enabled>
+                <showproducttitle>1</showproducttitle>
+                <showshortdescription>1</showshortdescription>
+                <showsku>1</showsku>
+                <showaddtocart>1</showaddtocart>
+                <showaddto>1</showaddto>
+                <showmailto>1</showmailto>
+                <showwishlist>1</showwishlist>
+                <showprice>1</showprice>
+                <showreview>1</showreview>
+                <showattributes>1</showattributes>
+                <showdescription>1</showdescription>
+                <showgallery>1</showgallery>
+            </general>
+            
+        </magecubeteam_quickview>
+    </default>
+</config>

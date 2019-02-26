@@ -1,0 +1,460 @@
+
+body.cms-index-index .page-title {
+    font-size: 22px;
+    width: auto;
+    height: auto;
+    position: static;
+}
+.hidden{ display: none; }
+ /*============Quick view UI start here for Shopaholic theme==================*/
+.quickview-product a {
+  top: 50%;
+  display: block;
+  left: 0;
+  opacity: 0;
+  position: absolute;
+  text-align: center;
+  transition: width 0.4s ease 0s;
+  width: 0;
+  z-index: 1;
+}
+.quickview-product a span {
+  color: #fff;
+  font-size: 1em;
+  font-weight: normal;
+  padding: 10px;
+  text-transform: none;
+  width: 100%;
+  border-radius: 4px;
+  background: #12a4dd;
+  opacity: 0;
+  transition: opacity 0.8s ease 0s, background-color 0.8s ease 0s;
+}
+.quickview-product a span span {
+  opacity: 1 !important;
+}
+.quickview-product i {
+  font-size: 1.16em;
+  line-height: 30px;
+  margin-right: 9px;
+}
+/*============Quick view UI start here for All theme css over write for magento start here==================*/
+/*-------Grid view--------------*/
+.product-item-info .product-item-actions{
+    position: static;
+    z-index: 11;
+    margin: 0px 0 10px;
+
+}
+.products-grid .product-item-inner{
+    box-shadow: none;
+    border: none;
+    border-top: none;
+    position: static;
+    }
+.products-grid .product-item-info {
+  position: relative;
+}
+.products-grid .product-item-info .product-item-photo + .quickview-product {
+  display: none;
+}
+.products-grid .product-item-info .product-item-photo + .quickview-product a span {
+  display: none;
+}
+.products-grid .product-item-info:hover .product-item-photo + .quickview-product {
+  display: none;
+}
+.products-grid .product-item-info:hover .product-item-photo + .quickview-product a span {
+  display: none;
+}
+.products-grid  .product-item-info .price_rating_table .quickview-product a { top: 29%;}
+
+.products-grid .product-item-info:hover .quickview-product a {
+  visibility: visible;
+  opacity: 1;
+  width: 100%;
+}
+.products-grid .product-item-info:hover .quickview-product a span {
+  opacity: 1;
+  width: auto;
+}
+
+/*---List view-----*/
+.products-list .product-item {
+     position: relative;
+}
+.products-list .product-item-actions{
+    position: static;
+    z-index: 11;
+    margin: 0px 0 10px;
+
+}
+.products-list  .product-item-inner{
+    box-shadow: none;
+    border: none;
+    border-top: none;
+    position: static;
+    }
+.products-list  .product-item-info {
+  position: relative;
+}
+.products-list  .product-item-info .product-item-photo + .quickview-product {
+  display: none;
+}
+.products-list  .product-item-info .product-item-photo + .quickview-product a span {
+  display: none;
+}
+.products-list  .product-item-info:hover .product-item-photo + .quickview-product {
+  display: none;
+}
+.products-list  .product-item-info:hover .product-item-photo + .quickview-product a span {
+  display: none;
+}
+.products-list .product-item-info .price_rating_table .quickview-product a { left: 10%; top: 48%;}
+.products-list  .product-item-info:hover .quickview-product a {
+  visibility: visible;
+  opacity: 1;
+  width: auto;
+}
+.products-list  .product-item-info:hover .quickview-product a span {
+  opacity: 1;
+  width: auto;
+}
+/*============Quick view UI start here for All theme css over write for magento end here==================*/
+
+
+
+.wrapper_quickview_item .product-info-main .product-info-price .price-box{ float: left; display: block; width: 100%; }
+.wrapper_quickview_item .product-info-main .product-info-price .price-box .price-from{ display: inline-block; }
+.wrapper_quickview_item .product-info-main .product-info-price .price-box .price-to{ display: inline-block; }
+.wrapper_quickview_item .product-info-main .product-info-price .price-box .price-container>span{ display: inline-block; }
+.wrapper_quickview_item  .product-info-main .product-reviews-summary {
+    width: 100%;
+}
+#quick-background {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 96;
+    background-color: #000;
+    opacity: 0.4;
+}
+#quick-window{
+    position:absolute;
+    margin: 30px auto;
+    left: 0;
+    right: 0;
+    clear: both;
+    float: none;
+    z-index:99;
+    background-color:#fff;
+    width:700px;
+    display:none;
+    -webkit-box-shadow: 0px 0px 30px 0px #000; /* Saf3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+    box-shadow: 0px 0px 30px 0px #000; /* Opera 10.5, IE9, FF4+, Chrome 6+, iOS 5 */
+
+}
+#quick-window .product-img-box{width:230px; float:left}
+#quickview-close{
+    width: 0;
+    /*background: url(../images/close.png) no-repeat;*/
+    cursor: pointer;
+    float: right;
+    overflow: hidden;
+     }
+     #quickview-close:before {
+    font-size: 13px;
+    color: #fff;
+    content: '\e616';
+    font-family: 'luma-icons';
+    margin: 0;
+    vertical-align: top;
+    display: inline-block;
+    font-weight: normal;
+    overflow: hidden;
+    speak: none;
+    text-align: center;
+    position: absolute;
+    right: -13px;
+    height: 32px;
+    width: 32px;
+    background: #34baee;
+    border-radius: 50%;
+    line-height: 32px;
+    top: -13px;
+}
+#quickview-header{
+    position: relative;
+}
+
+#ajax-preloader{
+    opacity:0.8;
+    filter:alpha(opacity="80");
+    text-align:center;
+    z-index:500;
+    background: url(../images/ajax_loader.gif) center top no-repeat;
+}
+#ajax-preloader .loading{border:2px solid #777; color:#000; background:#eee; text-align:center; width:120px; padding:15px; font-weight:bold;}
+.product-slider-wrapper {
+    float:left;
+    position:relative;
+}
+#quick-window .navi-product {
+    cursor: pointer;
+}
+#quick-window .navi-product div {
+    width: 26px;
+    height: 26px;
+    line-height: 26px;
+    color: #000;
+    position: absolute;
+    top: 50%;
+    z-index: 1550;
+    font-size: 1.2em;
+    background: #ccc;
+    cursor: pointer;
+    -webkit-box-shadow: 2px 2px 5px 0px #000;
+    box-shadow: 2px 2px 5px 0px #000;
+    text-align: center;
+}
+#quick-window .navi-product div:hover{
+    color:#fff;
+}
+#quick-window .navi-product .prev-prd {left: 0px;cursor: pointer;}
+#quick-window .navi-product .next-prd {right: 0px;}
+
+#quick-window .product-shop{float:left; position:relative; text-align:left;}
+#quick-window .product-shop .quicview-skupr{}
+#quick-window .product-shop .quicview-skupr h5,
+#quick-window .product-shop .quicview-skupr label{
+    display:inline-block;
+}
+.quick-shortdesc h5{padding-bottom:10px;}
+#quick-window .product-shop .actions{margin-top:10px;}
+#quick-window .product-essential{padding:0px;}
+.catalog-listing .product-image{position:relative;}
+.catalog-listing .product-image .ajax{position:absolute; display:none;}
+.product-image .ajax{ display:none;}
+.product-image .ajax:hover{ display:block;}
+
+.padding-10{padding-bottom:10px}
+
+a.ajax{
+    text-decoration:none;
+}
+.quick-view-content .product-price {
+    font-size: 30px;
+    width: 100%;
+    display: inline-block;
+}
+
+a.ajax:hover{text-decoration:none;}
+a.ajax .diamond{
+    line-height:34px;
+}
+
+
+
+
+
+
+.tab-bar { list-style: none; border-bottom: 1px solid #ccc; }
+.tab-bar li { display: inline; }
+.tab-bar li a { color: black; float: left; font-family: 'texgyreadventorbold';font-size: 16px; display: block; padding: 15px 25px; margin-left: -1px; position: relative; left: 1px; background: white; text-decoration: none; cursor: pointer; 
+                text-transform:uppercase;
+}
+.tab-bar li a:hover { background: #ccc; }
+.tab-bar .active-tab-name {
+    background-color: #E2D3CA;
+
+}
+
+.tabbed-area div[id^="box"] { background: white; padding:40px 5px 15px;     display: inline-block;}
+.tab-group:after { visibility: hidden; display: block; font-size: 0; content: " "; clear: both; height: 0; }
+.tab-bar li a { border: 1px solid #ccc;    border-bottom: 0; }
+.tabbed-area div[id^="box"]{border-left:none;border-right:none;}
+.box-wrap { position: relative; min-height: 200px; }
+#box-one, #box-two, #box-three {
+    position: relative;
+    width: 100%;
+}
+#box-two,
+#box-three{padding: 40px;}
+.main-img-quickview{position: relative;}
+.flat-button {
+    cursor: pointer;
+    color: blue;
+    text-decoration: underline;
+}
+.flat-button:hover {
+    text-decoration: none;
+}
+
+.product-shop label {
+    font-weight: bold;
+}
+.list-area, .review-list-area {
+    display: block;
+    width: 100%;
+    float: left;
+    text-align: left;
+}
+
+.tags-tab-quickview .form-add {
+    display: block;
+    width: 100%;
+    float: left;
+    text-align: left;
+    margin-bottom: 20px;
+}
+.tags-tab-quickview .form-add label{
+    float: left;
+    margin: 0 10px 0 0;
+    line-height: 42px;
+}
+.tags-tab-quickview .form-add input{
+    width: 290px;
+    padding: 11px 10px 10px;
+}
+.cz-product-name {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+.tag-item {
+    zdisplay: block;
+    zbackground-color: #E6E6E6;
+    padding: 2px;
+    border-radius: 4px;
+}
+.tag-item a {
+    text-decoration: none;
+}
+.count-view {
+    color: orange;
+    font-size: 13px;
+    font-weight: bold;
+}
+.review-count{}
+.review-count label{font-weight:bold;}
+
+.quick-view-content{
+    padding: 20px;
+}
+.product-info-stock-sku .name .value {
+   font-weight: 600;
+   font-size: 26px;
+}
+.quick-view-content .product-info-price {
+    margin-top: 25px;
+}
+
+.quick-view-content .product.media .main-img-quickview {
+    margin-bottom: 10px;
+}
+
+.quick-view-content .product-info-main .product-info-stock-sku {
+    display: block;
+    padding-left: 0;
+    text-align: left;
+}
+.quick-view-content .product-info-main .product-info-stock-sku .stock {
+    color: #333;
+    font-size: 13px;
+    margin-bottom: 10px;
+    text-transform: none;
+    font-weight: normal;
+}
+.quick-view-content .product-info-main .product-info-stock-sku .stock span {
+    color: #8c8c8c;
+    margin-left: 0;
+}
+.quick-view-content .product-info-main .product-info-stock-sku .product.attibute.sku {
+    text-transform: none;
+    display: block;
+    color: #333;
+}
+.quick-view-content .product-info-main .product-info-stock-sku .product.attibute.sku .value {
+    color: #8c8c8c;
+}
+.quick-view-content .product-info-main .product-reviews-summary .reviews-actions {
+    font-size: 13px;
+    padding-left: 0;
+    margin-left: 0;
+}
+.quick-view-content .product-info-main .product-reviews-summary .rating-summary {
+    padding-right: 10px;
+}
+.quick-view-content .product-info-main .price-box .price-wrapper .price {
+    font-size: 1.4rem;
+    font-weight: normal;
+}
+.quick-view-content .product-info-main .box-tocart .label {
+    display: inline-block;
+    line-height: 40px;
+    margin-right: 10px;
+}
+.quick-view-content .product-info-main .box-tocart .control {
+    display: inline-block;
+}
+.quick-view-content .product-info-main .box-tocart .control input {
+    height: 40px;
+    line-height: 40px;
+    width: 40px;
+    text-align: center;
+    padding: 0;
+}
+.quick-view-content .product-info-main .box-tocart .actions {
+    padding-top: 0;
+    vertical-align: top;
+}
+.quick-view-content .product-info-main .product-social-links {
+    margin-top: 30px;
+}
+.quick-view-content .product-info-main .product-social-links .product-addto-links {
+    margin: 0;
+}
+.quick-view-content .product-info-main .product-social-links .product-addto-links .action.towishlist,
+.quick-view-content .product-info-main .product-social-links .product-addto-links .action.tocompare {
+    background: none;
+    border: 0;
+    padding: 0;
+    border-radius: 0;
+    font-size: 14px;
+}
+.quick-view-content .product-info-main .product.attibute.overview {
+    color: #777;
+    font-size: 13px;
+    line-height: 1.5;
+}
+.quick-view-content .product.info.detailed {
+    display: inline-block;
+}
+.quick-view-content .product.info.detailed .product.attibute.description {
+    color: #777;
+    font-size: 13px;
+    line-height: 1.5;
+}
+@media only screen and (min-width:767px) {
+    .page-layout-1column .quick-view-content .product.media{
+    width: 35%;
+}
+
+.page-layout-1column .quick-view-content .product-info-main {
+    width: 50%;
+}
+}
+@media only screen and (max-width:767px) {
+    #quick-window{
+       width: 90%;
+       left: 0%;
+      }
+    .page-layout-1column .quick-view-content .product.media{
+    width: 100%;
+}
+
+.page-layout-1column .quick-view-content .product-info-main {
+    width:100%;
+}
+}

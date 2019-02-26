@@ -1,0 +1,137 @@
+<?xml version="1.0"?>
+<!--
+
+/**
+ * MageCubeTeam
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the MageCubeTeam.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.magecube.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    MageCubeTeam
+ * @package     MageCubeTeam_ProductQuickView
+ * @copyright   Copyright (c) 2018 MageCubeTeam (http://www.magecube.com/)
+ * @license     https://www.magecube.com/LICENSE.txt
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../Config/etc/system_file.xsd">
+    <system>
+        <tab id="magecubeteam" translate="label" sortOrder="450">
+            <label>magecubeteam</label>
+        </tab>
+        <section id="magecubeteam_quickview" translate="label" type="text" sortOrder="500" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Quick View</label>
+            <tab>magecubeteam</tab>
+            <resource>MageCubeTeam_ProductQuickView::magecubeteam_quick_view</resource>
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General</label>
+                <field id="enabled" translate="label comment" type="select" sortOrder="0"  showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="license_key" translate="label comment" type="text" sortOrder="10"  showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enter License key</label>
+                    <validate>required-entry</validate>
+                    <comment>Please contact the Support Team of MageCube (info@magecube.com) for your license key.</comment>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+                <field id="showproducttitle" translate="label comment" type="select" sortOrder="10"  showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show title in Quick View?</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+                <field id="showshortdescription" translate="label comment" type="select" sortOrder="20"  showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show short description in Quick View?</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+                <field id="showsku" translate="label comment" type="select" sortOrder="30"  showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show sku in Quick View?</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+                <field id="showaddtocart" translate="label comment" type="select" sortOrder="40"  showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show 'Add to Cart' in Quick View?</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+                <field id="showaddto" translate="label comment" type="select" sortOrder="50"  showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show compare option in Quick View?</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+                <field id="showmailto" translate="label comment" type="select" sortOrder="60"  showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show email option in Quick View?</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+                <field id="showwishlist" translate="label comment" type="select" sortOrder="70"  showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show wishlist option in Quick View?</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+                <field id="showprice" translate="label comment" type="select" sortOrder="80"  showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show price option in Quick View?</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+                <field id="showreview" translate="label comment" type="select" sortOrder="80"  showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show review option in Quick View?</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+                
+                <field id="showattributes" translate="label comment" type="select" sortOrder="80"  showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show attributes option in Quick View?</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+                <field id="showdescription" translate="label comment" type="select" sortOrder="80"  showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show description option in Quick View?</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+                
+                <field id="showgallery" translate="label comment" type="select" sortOrder="80"  showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show photo option in Quick View?</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

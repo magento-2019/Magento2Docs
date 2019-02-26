@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * MageCubeTeam
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the MageCubeTeam.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.magecube.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    MageCubeTeam
+ * @package     MageCubeTeam_ProductQuickView
+ * @copyright   Copyright (c) 2018 MageCubeTeam (http://www.magecube.com/)
+ * @license     https://www.magecube.com/LICENSE.txt
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/View/Layout/etc/page_configuration.xsd">
+    <head>
+        <link src="MageCubeTeam_ProductQuickView::css/quickview.css"/>
+    </head>
+    <referenceContainer name="content">
+       
+        <referenceBlock name="category.product.addto">
+            <block ifconfig="magecubeteam_quickview/general/enabled"
+                   class="MageCubeTeam\ProductQuickView\Block\CategoryList\QuickView"
+                   name="magecubeteam.quickview" as="mquickview" after="compare"
+                   template="MageCubeTeam_ProductQuickView::category/quickview.phtml"/>
+        </referenceBlock>
+        
+        <block ifconfig="magecubeteam_quickview/general/enabled" class="Magento\Framework\View\Element\Template" name="quickview" template="MageCubeTeam_ProductQuickView::quickview.phtml" />
+    </referenceContainer>
+</page>

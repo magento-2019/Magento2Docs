@@ -1,0 +1,26 @@
+<!--
+/**
+ * MageCubeTeam
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the MageCubeTeam.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.magecube.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    MageCubeTeam
+ * @package     MageCubeTeam_ProductQuickView
+ * @copyright   Copyright (c) 2018 MageCubeTeam (http://www.magecube.com/)
+ * @license     https://www.magecube.com/LICENSE.txt
+ */
+-->
+
+<div class="quickview-product">
+    <a data-role="quickview-button" data-id="<?php echo $block->getProduct()->getId(); ?>" href="<?php echo $block->getUrl('quickview/product/quickview/id/' . $block->getProduct()->getId()) ?>" title="<?php echo $block->escapeHtml(__('Quick view')); ?>" class="ajax diamond tooltip-hover" data-placement="top" data-original-title="<?php echo ('Quick View') ?>">
+    <span><i class="fa fa-search"></i><?php echo $block->escapeHtml(__('Quick View')); ?></span></a>
+</div>

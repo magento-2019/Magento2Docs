@@ -1,0 +1,28 @@
+{
+    "name": "magecubeteam/product-quick-view",
+    "description": "Magento2 QuickView",
+    "require": {
+        "php": "7.0.2|7.0.4|~7.0.6|~7.1.0",
+        "magento/framework": "101.0.*"
+    },
+    "type": "magento2-module",
+    "version": "2.0.1",
+    "license": [
+        "OSL-3.0",
+        "AFL-3.0"
+    ],
+    "authors": [
+        {
+            "name": "MageCubeTeam",
+            "email": "info@magecube.com",
+            "homepage": "https://www.magecube.com/",
+            "role": "Developer"
+        }
+    ],
+    "autoload": {
+        "files": ["registration.php"],
+        "psr-4": {
+            "MageCubeTeam\\ProductQuickView\\": ""
+        }
+    }
+}

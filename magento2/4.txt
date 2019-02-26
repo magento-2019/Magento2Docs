@@ -49,4 +49,4 @@
 2) https://magento.stackexchange.com/questions/115929/magento2-how-to-add-a-product-into-cart-programatically-when-checkout-cart-pro
 
 
-3) Use the event and observer to create a count attribute
+3) To write a plugin see the controller 

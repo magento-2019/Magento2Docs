@@ -1,0 +1,25 @@
+
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "MageArray_Quickview/js/quickview":<?php echo $block->getQuickViewOptions() ?>
+        }
+    }
+</script>
+<script>
+    require(["jquery", "jquery/ui", "MageArray_Quickview/js/quickview"], function ($,ui,QuickView) {
+       $('body').ajaxComplete(function() {
+		   var config=<?php echo $block->getQuickViewOptions();?>;
+		   var handlerClass=config.handlerClassName;
+		   if(handlerClass==null){
+			   config.handlerClassName="ma-quick-view-button";
+		   }
+		   /* console.log(config.handlerClassName); */
+		   var widget = $(this).QuickView({});
+		   if (!$('body').hasClass('catalog-product-view')) {
+               widget.QuickView('addQuickView',config);
+				widget.QuickView('quickViewPopup',config);
+            }
+        }); 
+    });
+</script>

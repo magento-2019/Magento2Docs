@@ -1,0 +1,18 @@
+<?php
+/**
+ * Copyright (c) 2017. Volodumur Hryvinskyi.  All rights reserved.
+ * @author: <mailto:volodumur@hryvinskyi.com>
+ * @github: <https://github.com/scriptua>
+ */
+
+// @codingStandardsIgnoreFile
+
+/**
+ * Product description template
+ *
+ * @var $block \Magento\Catalog\Block\Product\View\Description
+ */
+
+/* @escapeNotVerified */
+echo $this->helper('Magento\Catalog\Helper\Output')
+    ->productAttribute($block->getProduct(), $block->getProduct()->getDescription(), 'description');

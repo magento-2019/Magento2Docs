@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <quickview>
+            <general>
+                <enable>1</enable>
+				<btn_label> Quick View</btn_label>
+				<item_class><![CDATA[.product-item]]></item_class>
+				<btn_container><![CDATA[.product-item-info]]></btn_container>
+            </general>
+			<popup>
+				<transition>elastic</transition>
+				<transition_speed>300</transition_speed>
+				<initial_width>120</initial_width>
+				<initial_height>120</initial_height>
+				<show_title>0</show_title>
+				<popup_title> Quick View</popup_title>
+				<show_current_status>1</show_current_status>
+				<show_tabs>1</show_tabs>
+				<show_product_downloadable_sample>1</show_product_downloadable_sample>
+			</popup>
+        </quickview>
+    </default>
+</config>
