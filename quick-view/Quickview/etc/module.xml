@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/Module/etc/module.xsd">
     <module name="MageArray_Quickview" schema_version="1.0.1" setup_version="1.0.1">
-	<sequence>
-			<module name="Magento_Catalog"/>
-			<module name="Magento_Bundle"/>
-			</sequence>
-	</module>
-	
+      	<sequence>
+      			<module name="Magento_Catalog"/>
+      			<module name="Magento_Bundle"/>
+      	</sequence>
+  	</module>
+
 </config>
