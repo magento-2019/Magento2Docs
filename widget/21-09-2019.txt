@@ -1,0 +1,31 @@
+To Do List
+1) Review Step
+2) Add an extra ui component
+3) Deps, Sort Order, Types
+
+
+
+1) Local Storage
+  https://magento.stackexchange.com/questions/203951/magento2-check-if-customer-is-logged-in-or-not-in-knockout-template
+
+2) Extra Tab in product page
+  https://www.cloudways.com/blog/add-custom-tab-product-page-magento-2/
+
+3) Check out flow
+  https://inviqa.com/blog/technical-guide-magento-2-checkout
+
+  -> defines each one of these components and their parent / child relationship in a large XML file
+  -> which can be extended or overridden in your own theme or module
+
+  -> Magento 2 parses the XML file and runs it through the layout processor
+  -> which processes each XML node and reads its configuration, which it then inserts into a
+  -> large multi-dimensional associative array,where each key represents a component or a group of components within.
+
+  -> <item name="component" xsi:type="string">uiComponent</item>
+    alias for the full file path of the base Knockout JS components used in the Magento checkout
+
+  -> displayArea render each component in the HTML
+  -> This refers to the getRegion command in knockoutJS which tells the KnockoutJS renderer
+     where to actually place the component in the HTML.
+
+  -> sortOrder he position of where child components are rendered is always controlled.

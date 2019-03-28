@@ -16,6 +16,7 @@
                 <argument name='template' xsi:type='string'></argument>
             </action>
         </referenceBlock>
+        
         <referenceBlock name="product.info.sku">
             <action method="setTemplate">
                 <argument name="template" xsi:type="helper" helper="WeltPixel\Quickview\Helper\Data::getSkuTemplate">
@@ -41,6 +42,7 @@
                 <argument name="template" xsi:type="string">WeltPixel_Quickview::product/view/addtocart.phtml</argument>
             </action>
         </referenceBlock>
+
         <referenceBlock name="product.info.addtocart.additional">
             <action method="setTemplate">
                 <argument name="template" xsi:type="string">WeltPixel_Quickview::product/view/addtocart.phtml</argument>

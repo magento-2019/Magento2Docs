@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css"
+         rel = "stylesheet">
+      <script src = "https://code.jquery.com/jquery-1.10.2.js"></script>
+      <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+      <style>
+         #dialogMsg { width: 150px; height: 150px; padding: 0.5em; background:#eee;}
+         .almost-done{
+           background: #ef5422;
+         }
+         .ui-progressbar-value{
+           background: #232323;
+         }
+         .redcolor{
+           background: red;
+         }
+      </style>
+      <script type = "text/javascript">
+         $(function () {
+            $('#dialogMsg').draggable(
+            { axis: "x", addClasses: false, delay: 500}
+            );
+         });
+      </script>
+   </head>
+
+   <body>
+      <form id = "form1" runat = "server">
+        <input type="text" name="name" value="">
+        <input type="number" name="age" value="">
+        <button type="submit" name="button" id="btn">Submit</button>
+         <div id = "dialogMsg" title = "First JqueryUI Example">
+            Hello this is my first JqueryUI example.
+         </div>
+      </form>
+
+      <div class="" id="elem">
+
+      </div>
+      <a href="#">hi there</a>
+
+
+   </body>
+   <script type="text/javascript">
+
+   (function($){
+     $.fn.changecolorfortext = function( options ){
+       var settings = $.extend({
+         color: "#000",
+         backgroundColor: "red"
+       },options);
+
+       this.css({
+         color: settings.color,
+         backgroundColor: settings.backgroundColor
+       });
+
+      return this;
+     }
+
+     $("a").changecolorfortext({
+    color: "orange",
+    backgroundColor: "transparent"
+}).addClass("redcolor");
+
+     $( "#elem" ).progressbar({ value: 20 }).addClass( "almost-done" );;
+
+     $( "#elem" ).bind( "progressbarchange", function() {
+        alert( "The value has changed!" );
+      });
+
+     $('#btn').on("click",(event)=>{
+       event.preventDefault();
+
+       console.log(event);
+       var data = $( "#form1" ).serializeArray();
+       console.log(data[0]['value']);
+     });
+   }(jQuery));
+
+   </script>
+</html>

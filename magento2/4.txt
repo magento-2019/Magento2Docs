@@ -49,4 +49,39 @@
 2) https://magento.stackexchange.com/questions/115929/magento2-how-to-add-a-product-into-cart-programatically-when-checkout-cart-pro
 
 
-3) To write a plugin see the controller 
+3) {route frontName}/{controller name}/{action name}
+    The frontName attribute value becomes the part of our URL structure.
+    Ssimply put, the URL formula for hitting the Crud action goes like:
+
+    {magento-base-url}/index.php/{route frontName}/{controller name}/{action name}
+
+    One important thing to note here is that the naming convention for layout.xmls is
+    {route id}_{controller name}_{action name}.xml.
+    You have to keep this in mind, if your routeId is diferent from your frontName
+
+4) CRUD operations
+  Module/Model/TodoItem.php   --Base model file
+
+  Resource Model--->
+  the model class defines the methods an end-user-programmer will use to interact with a model’s data.
+  A resource model class contains the methods that will actually fetch the information from the database.
+
+  AbstractDb class----> This base class contains the basic logic for fetching information from a
+  single database table.
+
+  https://wearec3.co.uk/blog/insight/crud-create-read-update-destroy-magento2/
+
+  In here we’re going to place our Collection.php class. You may have noticed we did not call this Notes, or
+  NotesCollection. This is because Magento expects to find the relevant collection class from the namespace for
+  the resource model it links to, and expects to find a folder under the resource model name, and the
+  collection class within.  As you’ll see this model is where we specify which database table to link to, and
+  which column to use for its id.
+
+
+
+5) https://magento.stackexchange.com/questions/86188/magento-2-changing-a-blocks-template
+
+
+  database specific logic to ---> the resource model
+  business specific logic to ---> abstract model
+  collection behaviour to ---> collection model.

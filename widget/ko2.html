@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+   <head>
+      <title>KnockoutJS Simple Example</title>
+      <script src = "https://ajax.aspnetcdn.com/ajax/knockout/knockout-3.1.0.js"
+         type = "text/javascript"></script>
+   </head>
+   <ul data-bind="foreach: places">
+    <li>
+        <span data-bind="text: $data"></span>
+        <button data-bind="click: $parent.removePlace">Remove</button>
+    </li>
+   </ul>
+
+   <form data-bind="submit: addNote">
+     <div class="form-group">
+       <label>Add Note:</label>
+       <textarea data-bind="value: noteToAdd" class="form-control"></textarea>
+       <br />
+       <button class="btn btn-primary" type="submit">Add</button>
+     </div>
+   </form>
+
+
+   <ul data-bind="foreach: notes">
+    <li>
+        <span data-bind="text: dateTime"></span>
+        <span data-bind="text: text"></span>
+    </li>
+  </ul>
+
+ <script type="text/javascript">
+     function MyViewModel() {
+         var self = this;
+         self.places = ko.observableArray(['London', 'Paris', 'Tokyo']);
+
+         // The current item will be passed as the first parameter, so we know which place to remove
+         self.removePlace = function(place, event) {
+           console.log("Place : ", place);
+             if (event.shiftKey) {
+                self.places.remove(place);
+            } else {
+                //do normal action
+            }
+         };
+
+         self.notes = ko.observableArray([
+          { dateTime: new Date(), text: "krishna"},
+          { dateTime: new Date(), text: "kumar"}
+        ]);
+
+        self.noteToAdd = ko.observable();
+
+        self.addNote = function () {
+        var note = this.noteToAdd().trim();
+        if (note) {
+          self.notes.push({ dateTime: new Date(), text: note });
+          self.noteToAdd("");
+        }
+        };
+
+     }
+     var myVM = { viewModel : new MyViewModel() };
+     ko.applyBindings(myVM.viewModel);
+</script>
+   <body>
+
+   </body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+   <head>
+      <title>KnockoutJS Simple Example</title>
+      <script src="http://code.jquery.com/jquery-3.3.1.js"></script>
+      <script src = "https://ajax.aspnetcdn.com/ajax/knockout/knockout-3.1.0.js"></script>
+   </head>
+
+   <body>
+      <!-- This is called "view" of HTML markup that defines the appearance of UI -->
+
+      <p>First String: <input data-bind = "value: firstString" /></p>
+      <p>Second String: <input data-bind = "value: secondString" /></p>
+
+      <p>First String: <strong data-bind = "text: firstString">Hi</strong></p>
+      <p>Second String: <strong data-bind = "text: secondString">There</strong></p>
+
+      <p>Derived String: <strong data-bind = "text: thirdString"></strong></p>
+
+
+      <h2>Participants</h2>
+        Here are the participants:
+        <div data-bind="template: { name: 'person-template', data: buyer }"></div>
+        <div data-bind="template: { name: 'person-template2', data: seller }"></div>
+        
+        <script type="text/html" id="person-template">
+            <h3 data-bind="text: name"></h3>
+            <p>Credits: <span data-bind="text: credits"></span></p>
+        </script>
+
+        <script type="text/html" id="person-template2">
+            <h3 data-bind="text: name"></h3>
+            <input type="text" data-bind="value: sample">
+            <p data-bind="text: sample1"></p>
+        </script>
+    
+
+        <ul data-bind="template: { name: 'seasonTemplate', foreach: seasons, as: 'season' }"></ul>
+ 
+        <script type="text/html" id="seasonTemplate">
+            <li>
+                <strong data-bind="text: name"></strong>
+                <ul data-bind="template: { name: 'monthTemplate', foreach: months, as: 'month' }"></ul>
+            </li>
+        </script>
+
+        <script type="text/html" id="monthTemplate">
+            <li>
+                <span data-bind="text: month"></span>
+                is in
+                <span data-bind="text: season.name"></span>
+            </li>
+        </script>
+
+        <div data-bind="slideVisible: giftWrap, slideDuration:600">You have selected the option</div>
+        <label><input type="checkbox" data-bind="checked: giftWrap" /> Gift wrap</label>
+
+      <script>
+         
+         function AppViewModel() {
+            this.firstString = ko.observable("Enter First String");
+            this.secondString = ko.observable("Enter Second String");
+
+            this.buyer = { name: 'Franklin', credits: 250 };
+            this.seller = { name: 'Mario', sample1: 'World', sample: 'Hello' };
+
+            this.obsinput = ko.observable("Enter First String");
+
+            this.seasons= ko.observableArray([
+            { name: 'Spring', months: [ 'March', 'April', 'May' ] },
+            { name: 'Summer', months: [ 'June', 'July', 'August' ] },
+            { name: 'Autumn', months: [ 'September', 'October', 'November' ] },
+            { name: 'Winter', months: [ 'December', 'January', 'February' ] }
+            ]);
+
+            this.thirdString = ko.computed(function() {
+               return this.firstString() + " " + this.secondString();
+            }, this);
+
+            giftWrap= ko.observable(false);
+            console.log("Sample log",giftWrap());
+
+            
+         }
+
+         ko.bindingHandlers.slideVisible = {
+                init: function(element, valueAccessor) {
+                    var value = ko.unwrap(valueAccessor()); // Get the current value of the current property we're bound to
+                    console.log("Initial calue ", value);
+                    $(element).toggle(value); // jQuery will hide/show the element depending on whether "value" or true or false
+                },
+                update: function(element, valueAccessor, allBindings) {
+                    // First get the latest data that we're bound to
+                    var value = valueAccessor();
+            
+                    // Next, whether or not the supplied model property is observable, get its current value
+                    var valueUnwrapped = ko.unwrap(value);
+            
+                    // Grab some more data from another binding property
+                    var duration = allBindings.get('slideDuration') || 400; // 400ms is default duration unless otherwise specified
+            
+                    // Now manipulate the DOM element
+                    if (valueUnwrapped == true)
+                        $(element).slideDown(duration); // Make the element visible
+                    else
+                        $(element).slideUp(duration);   // Make the element invisible
+                }
+            };
+
+
+         // Activates knockout.js
+         ko.applyBindings(new AppViewModel());
+      </script>
+
+
+   
+    
+    
+
+   </body>
+</html>

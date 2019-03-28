@@ -21,3 +21,21 @@
 2) Icons footer round shape.
 3) Disable arrow for the last slide in slick.
 4) Correct the flickering on hover on the product item.
+
+
+2/03/2019
+
+1) router id=standard in routes.xml
+2) Base in folders - areas in 
+3) array $data[] in parent construct  --Task
+4) page title, keyword, browser tab, description - ways not using title  --Task
+5) cacheable false use cases
+6) edit the template files in module add to cart TO buy now --- Task
+7) override the block class  --last
+8) helper class uses -task
+9) Action file methods list 
+10) Factory plugin and preferences ... classes to create a factory
+
+18/01/2019
+
+1) layout processor

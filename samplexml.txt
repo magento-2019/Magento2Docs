@@ -1,0 +1,119 @@
+"<user><id>2</id><email>andrew.johnson@demcotest.com</email><address><id>1</id><firstName>andrew</firstName><lastName>johnson</lastName><street>1600 E Spring Valley Rd</street><street2>null</street2><city>Richardson</city><state>Texas</state><countryId>US</countryId><telephone>7142495546</telephone><zipcode>75081-5399</zipcode><addressType>S</addressType><ERPCustomerId>610401464_811532172_001</ERPCustomerId><AddressAttribute><name>demco_loadingdock</name><value>1</value></AddressAttribute><AddressAttribute><name>demco_extrainvoice</name><value>0</value></AddressAttribute></address><customerAttributes><name>promo_catalog</name><value>1</value></customerAttributes></user>"
+
+
+
+
+
+define(
+    [
+        'jquery',
+        'ko',
+        'uiComponent',
+    ],
+    function ($, ko, component) {
+        "use strict";
+
+        function GiftToSend(name, initialProduct) {
+            var self = this;
+            self.name = name;
+            self.product = ko.observable(initialProduct);
+
+            self.formattedPrice = ko.computed(function() {
+                var price = self.product().price;
+                console.log("Product Price ", price);
+                return price ? "$" + price.toFixed(2) : "None";
+            });
+
+        }
+
+        return component.extend({
+
+          // initialize: this function is used for initializing our component.
+          initialize: function () {
+            // For extended initialization code of the parent component,
+            // we need to use this._super(); in initialize function.
+              this._super();
+              this._render();
+
+          },
+
+          // Used to render the initial values in the gift row and product select options
+          _render:function(){
+
+              var self = this,
+                  products = [
+                  { productName: "Select", price: 0 },
+                  { productName: "Product-1", price: 77.77 },
+                  { productName: "Product-2", price: 34.95 },
+                  { productName: "Product-3", price: 290 }
+              ];
+
+             /** Add the producs in the select options
+               * passes an array of objects
+               **/
+              this.addProduct(products);
+              var init_products = [
+                  new GiftToSend ("Henry",this.availableProducts()[0]),
+                  new GiftToSend ("Bert",this.availableProducts()[0]),
+
+              ];
+
+              // Add the gift recipients into the list of recipients
+              for(var i in init_products){
+                this.products.push(init_products[i]);
+              }
+          },
+
+
+            // To add the product in the select option
+            addProduct:function(products){
+
+                for (var i in products){
+                    this.availableProducts.push(products[i]);
+                }
+
+            },
+
+            // Initialize recipient list in the select options
+            products: ko.observableArray([]),
+
+            // Initialize gift list in the select options
+            availableProducts : ko.observableArray([]),
+
+            // observable for the adding the new product name and the price in the select option
+            newProductName: ko.observable(),
+            newProductPrice: ko.observable(),
+
+            // Adding the new recepient
+            addRecipient : function() {
+                var product = new GiftToSend ("Your Name",this.availableProducts()[0]);
+                this.products.push(product);
+            },
+
+
+            // To remove and recepient from the gift list
+            removeRecipient : function(parent,product) {
+                parent.products.remove(product);
+            },
+
+            totalPrice : function() {
+                var total = 0;
+                for (var i = 0; i < this.products().length; i++)
+                    total += this.products()[i].product().price;
+                return total;
+            },
+
+            addProductToList : function() {
+                var product = { productName: this.newProductName, price: this.newProductPrice};
+                this.availableProducts.push(product);
+            },
+
+            // We can call html template from our js components also by passing
+            // template key with value on defaults object.
+            defaults: {
+                template: 'Cabin_Knockout/grid',
+            }
+        });
+    }
+);
+
